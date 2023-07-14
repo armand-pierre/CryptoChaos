@@ -1,13 +1,6 @@
 def logistic_encrypt(plain_text: str, r: float) -> str:
     assert 3.6 < r < 4.0
-    asc = []
-    for c in plain_text:
-        asc.append(ord(c))
-    for i in range(len(asc)):
-        if asc[i] == 10:
-            asc[i] = 1
-        else:
-            asc[i] -= 30
+    asc = [1 if ord(c) == 10 else ord(c) - 30 for c in plain_text]
     x = float("0." + str(len(asc)))
 
     def logistic(r, x):
@@ -40,12 +33,7 @@ def logistic_encrypt(plain_text: str, r: float) -> str:
 
 def logistic_decrypt(cipher_text: str, r: float) -> str:
     assert 3.6 < r < 4.0
-    asc = []
-    for c in cipher_text:
-        if ord(c) == 10:
-            asc.append(1)
-        else:
-            asc.append(ord(c) - 30)
+    asc = [1 if ord(c) == 10 else ord(c) - 30 for c in cipher_text]
     num = "0." + str(len(asc))
     x = float(num)
 
